@@ -1,56 +1,35 @@
-#벡터의 이해
-x <- c(1,2,3) #숫자형 벡터
-x
-y <- c("a", "b", "c", "가") #문자형 벡터
-y
-z <- c(TRUE, T, FALSE, F) #논리형 벡터
-z
-#벡터는 동일한 자료형값을 넣어줘야 원하는 결과를 얻을수 있다.
-w <- c(1,2,3, "a","가") 
-w
+#데이터프레임 알아보기
 
-#연속적인 값을 벡터로 만드는 방법
-r1 <- c(1:100)
-r1
+city <- c("서울", "도쿄", "워싱턴") #문자형 벡터
+rank <- c(1,2,3)
+a <- c(1:10) #정수형 벡터
+b <- c(seq(0.0, 1.0, 0.1)) #뉴메릭 벡터
+#class 라는 함수는 매개변수로 들어간 변수에 담긴
+#데이터셋 구조를 알려준다
+class(rank)
+#str() 라는 함수는 요약정보를 알려준다.
+str(rank)
 
-r2 <- c(1,2,5, 50:100)
-r2
-#seq 시퀀스 맨뒤 숫자만큼 일정한 간격으로 벡터생성
-r3 <- seq(1,101,3)
-r3
+# 문자형과 정수형 벡터가 합쳐짐
+cityinfo <- data.frame(city, rank) 
+cityinfo
+# 데이터프레임도 2차원 데이터타입이니
+# 인덱스로 접근 가능하고 수정도 가능하다.
+cityinfo[1,1]
+class(cityinfo[1])
+class(cityinfo[,2])
 
-r4 <- seq(0.1, 1.0, 0.1)
-r4
-#반복을 통해서 벡터를 생성
-r5 <- rep(1,times=5)
-r5
-r6 <- rep(1:5, times=3)
-r6
-r7 <- rep(c(1,2,3), times=5)
-r7
+class(iris)
+# dim = 행과 열의 갯수를 순서대로 알려줌
+dim(iris)
+dim(cityinfo)
 
-score <- c(100,80,75)
-score
-names(score)#score 라는 함수에 이름 설정
-names(score) <- c("마이클", "신은혁", "마스터")
-names(score)
-score
+str(iris)
 
-#벡터의 요소 추출(인덱스를 이용)
-d <- c(1,4,6,12)
-d[1]
-d[2]
-d[3]
-d[4]
-d[5]
-#벡터의 값을 변경
-d[2] <- 100
-d[2]
+# iris 는 R에서 제공해주는 데이터셋셋
+iris[1,1]
+iris[,"Species"]
+# iris 데이터셋에서 sepal.length의 평균값
+mean(iris[, "Sepal.Length"]) 
 
-GDP <- c(5000,3000,10000)
-GDP
-names(GDP) <- c("한국", "일본","중국")
-GDP
-GDP[1] #첫번째 배열 호출
-GDP["일본"] #일본이라는 배열 호출
-GDP[c("일본","한국")] #베열 순서와 상관없이 이름에 맞춰서 호출
+
