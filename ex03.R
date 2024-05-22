@@ -1,58 +1,83 @@
-#2024-05-09 R수업 7차시
-#벡터의 연산
-d <- c(1,10,5,3)
+# 매트릭스, 데이터프레임 다루기
 
-#벡터의 산술연산
-2*d #각 요소에 2를 곱하게됨
+iris
+#행과 열의 개수를 표시하는 함수
+dim(iris)
 
-d-5
-3*d+4
+#행의 개수만 출력
+nrow(iris)
+#열의 개수만 출력
+ncol(iris)
 
-#벡터와 벡터간의 연산 / 벡터안에 원소의 갯수가 같아야함
-x <- c(2,4,6)
-y <- c(1,3,5)
-x+y #대응하는 요소끼리 더하여 출력함
+#열의 이름 출력
+colnames(iris)
 
-z <- x+y
+# 행의 이름 출력
+rownames(iris)
+
+#데이터셋의 앞부분 일부 출력
+head(iris)
+#데이터셋의 뒷부분 일부 출력
+tail(iris)
+#데이터셋의 요약 정보를 출력
+str(iris)
+#데이터셋의 자료구조 출력
+class(iris)
+#5번째 항목인 품종은 팩터이다(Levels 자동 출력)
+class(iris[,5])
+levels(iris[,5])
+#중복된 값 제거 후 품종의 종류 확인
+unique(iris[,5])
+# 5번째 열은 팩터이기 때문에 합계, 평균 출력 못함
+colSums(iris[,-5]) # 5번째 열 제외
+colMeans(iris[,-5])
+# 행의 합계, 평균
+rowSums(iris[,-5])
+rowMeans(iris[,-5])
+
+#빈도수 확인
+table(iris[,"Species"])
+
+# 매트릭스 행열 서로 바꾸기
+z <- matrix(1:20, nrow = 4, ncol = 5)
 z
+t(z) # t() 는 행과 열의 값을 서로 바꾸는 함수
 
-#벡터의 함수를 이용
-d <- c(1:10)
-d
-#벡터 요소의 합
-sum(d)
-sum(3*d)
+# subset() 함수는 조건에 맞는 값을 추출함
+setosa <- subset(x = iris, Species=="setosa")
+setosa
+class(setosa)
 
-#벡터 요소의 길이(개수)
-length(d)
-
-#벡터 요소의 평균
-mean(d)
-mean(d[1:5]) # 1에서 5까지의 평균
-
-#최대값 최소값
-max(d)
-min(d)
-
-#정렬(기본적으로 오름차순)
-sort(d)
-sort(x=d, decreasing = TRUE) #decreasing = 내림차순
-sort(d, T)
-
-#중앙값
-v1 <- median(d)
+v1 <- subset(x = iris, (Sepal.Length>5.0) & (Sepal.Width>4.0))
 v1
 
-v2 <- sum(d)/length(d)
-v2
+# 매트릭스(행열)에 대한 산술연산
+a <- matrix(data = 1:20, nrow = 4, ncol = 5)
+b <- matrix(1:20, 4, 5)
 
-#벡터의 논리연산
-d <- c(1:9)
-d
-d >= 5 #결과는 TURE 또는 FALSE 만 나옴(논리값출력)
-d[d>=5] #대괄호가 들어가면 실제값을 출력
-sum(d[d>5]) # 5초과의 합계를 출력
-condi <- (d>5) & (d<8)
-condi
-d[condi] #값이 나오게 하려면
+a
+a*2
+a+b
+b-a
+class(a)
+class(b)
+state.x77
+
+str(state.x77)
+dim(state.x77)
+class(state.x77)
+
+# 매트릭스를 데이터프레임 형태로 변경하고자 할때
+st <- as.data.frame(state.x77)
+st
+class(st)
+
+# 데이터프레임에 접근하는 방법
+iris[,1]
+iris$Sepal.Length[1]
+st$Murder # $ 를 써서 접근하는것 추천
+
+# 접두사로 is가 있으면 ~~이냐 라는 확인하는 용
+is.matrix(st) # st 가 매트릭스 ~ 냐?
+is.data.frame(st) 
 
